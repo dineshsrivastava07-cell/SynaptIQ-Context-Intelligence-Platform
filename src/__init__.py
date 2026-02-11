@@ -1,0 +1,1 @@
+# SynaptIQ Context Intelligence Platform

@@ -1,0 +1,14 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Context Intelligence Platform - Person",
+  "type": "object",
+  "properties": {
+    "person_id": { "type": "string", "format": "uuid" },
+    "name": { "type": "string" },
+    "role": { "type": "string" },
+    "team": { "type": "string" },
+    "org_unit": { "type": "string" }
+  },
+  "required": ["person_id", "name", "role", "team", "org_unit"],
+  "additionalProperties": false
+}

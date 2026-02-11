@@ -1,0 +1,9 @@
+{
+  "url": "nats://localhost:4222",
+  "topics": {
+    "raw_events": "raw.events",
+    "signals_extracted": "signals.extracted",
+    "context_updates": "context.updates",
+    "confidence_updates": "confidence.updates"
+  }
+}

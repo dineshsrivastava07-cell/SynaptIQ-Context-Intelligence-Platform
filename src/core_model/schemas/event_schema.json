@@ -1,0 +1,16 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Context Intelligence Platform - Universal Event",
+  "type": "object",
+  "properties": {
+    "event_id": { "type": "string", "format": "uuid" },
+    "event_type": { "type": "string", "enum": ["create", "modify", "access", "reference", "discuss", "approve"] },
+    "source_system": { "type": "string" },
+    "artifact_id": { "type": "string", "format": "uuid" },
+    "person_id": { "type": ["string", "null"], "format": "uuid" },
+    "timestamp": { "type": "string", "format": "date-time" },
+    "metadata": { "type": "object", "additionalProperties": true }
+  },
+  "required": ["event_id", "event_type", "source_system", "artifact_id", "timestamp"],
+  "additionalProperties": false
+}

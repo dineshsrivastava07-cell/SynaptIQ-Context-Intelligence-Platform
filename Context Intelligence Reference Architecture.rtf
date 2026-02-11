@@ -1,0 +1,513 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2867
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fswiss\fcharset0 Helvetica-Bold;\f2\ftech\fcharset77 Symbol;
+\f3\froman\fcharset0 TimesNewRomanPSMT;}
+{\colortbl;\red255\green255\blue255;\red15\green55\blue78;\red0\green0\blue0;\red109\green109\blue109;
+}
+{\*\expandedcolortbl;;\cssrgb\c5882\c27843\c38039;\cssrgb\c0\c0\c0;\cssrgb\c50196\c50196\c50196;
+}
+\paperw11900\paperh16840\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\deftab720
+\pard\pardeftab720\sa106\partightenfactor0
+
+\f0\fs53\fsmilli26667 \cf2 \expnd0\expndtw0\kerning0
+Context Intelligence Reference Architecture\
+\pard\pardeftab720\sa106\partightenfactor0
+
+\fs42\fsmilli21333 \cf2 1. Purpose\
+\pard\pardeftab720\sa240\partightenfactor0
+
+\fs32 \cf3 This document defines the 
+\f1\b frozen reference architecture
+\f0\b0  for a Context Intelligence Platform. It is intended to guide system architects, engineers, and product teams in building a production-grade, local-first system that provides shared organizational context across enterprise tools without orchestrating or controlling business processes.\
+\pard\pardeftab720\sa160\qc\partightenfactor0
+\cf4 \
+\pard\pardeftab720\sa106\partightenfactor0
+
+\fs42\fsmilli21333 \cf2 2. Architectural Objectives\
+\pard\pardeftab720\li960\fi-480\sa47\partightenfactor0
+
+\f2\fs32 \cf3 \'e1
+\f3\fs18\fsmilli9333 \'a0\'a0\'a0\'a0\'a0 
+\f0\fs32 Eliminate context silos across enterprise systems\
+
+\f2 \'e1
+\f3\fs18\fsmilli9333 \'a0\'a0\'a0\'a0\'a0 
+\f0\fs32 Preserve existing systems of record\
+
+\f2 \'e1
+\f3\fs18\fsmilli9333 \'a0\'a0\'a0\'a0\'a0 
+\f0\fs32 Provide ownership, freshness, trust, and activity awareness\
+
+\f2 \'e1
+\f3\fs18\fsmilli9333 \'a0\'a0\'a0\'a0\'a0 
+\f0\fs32 Remain advisory, explainable, and non-intrusive\
+
+\f2 \'e1
+\f3\fs18\fsmilli9333 \'a0\'a0\'a0\'a0\'a0 
+\f0\fs32 Be deployable locally / on\uc0\u8209 prem first\
+
+\f2 \'e1
+\f3\fs18\fsmilli9333 \'a0\'a0\'a0\'a0\'a0 
+\f0\fs32 Minimize dependence on LLMs\
+\pard\pardeftab720\sa160\qc\partightenfactor0
+\cf4 \
+\pard\pardeftab720\sa106\partightenfactor0
+
+\fs42\fsmilli21333 \cf2 3. High-Level Architecture (Frozen)\
+\pard\pardeftab720\sa106\partightenfactor0
+
+\fs37\fsmilli18667 \cf2 Layered View\
+\pard\pardeftab720\li960\fi-480\sa47\partightenfactor0
+
+\fs32 \cf3 1.
+\f3\fs18\fsmilli9333 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 
+\f0\fs32 Source Systems Layer (Read-only)\
+2.
+\f3\fs18\fsmilli9333 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 
+\f0\fs32 Ingestion & Observation Layer\
+3.
+\f3\fs18\fsmilli9333 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 
+\f0\fs32 Signal Extraction & Enrichment Layer\
+4.
+\f3\fs18\fsmilli9333 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 
+\f0\fs32 Context Graph Layer (Core)\
+5.
+\f3\fs18\fsmilli9333 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 
+\f0\fs32 Trust, Freshness & Confidence Layer\
+6.
+\f3\fs18\fsmilli9333 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 
+\f0\fs32 Intelligence & Reasoning Layer\
+7.
+\f3\fs18\fsmilli9333 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 
+\f0\fs32 Interaction Layer\
+8.
+\f3\fs18\fsmilli9333 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 
+\f0\fs32 Governance & Control Layer\
+\pard\pardeftab720\sa240\partightenfactor0
+\cf3 Each layer is independently evolvable and communicates through events or well-defined APIs.\
+\pard\pardeftab720\sa160\qc\partightenfactor0
+\cf4 \
+\pard\pardeftab720\sa106\partightenfactor0
+
+\fs42\fsmilli21333 \cf2 4. Layer Responsibilities\
+\pard\pardeftab720\sa106\partightenfactor0
+
+\fs37\fsmilli18667 \cf2 4.1 Source Systems Layer\
+\pard\pardeftab720\li960\fi-480\sa47\partightenfactor0
+
+\f2\fs32 \cf3 \'e1
+\f3\fs18\fsmilli9333 \'a0\'a0\'a0\'a0\'a0 
+\f0\fs32 ERP, CRM, HRMS\
+
+\f2 \'e1
+\f3\fs18\fsmilli9333 \'a0\'a0\'a0\'a0\'a0 
+\f0\fs32 Ticketing systems\
+
+\f2 \'e1
+\f3\fs18\fsmilli9333 \'a0\'a0\'a0\'a0\'a0 
+\f0\fs32 Email & chat tools\
+
+\f2 \'e1
+\f3\fs18\fsmilli9333 \'a0\'a0\'a0\'a0\'a0 
+\f0\fs32 Local / shared file systems\
+
+\f2 \'e1
+\f3\fs18\fsmilli9333 \'a0\'a0\'a0\'a0\'a0 
+\f0\fs32 Wikis and document repositories\
+\pard\pardeftab720\sa240\partightenfactor0
+
+\f1\b \cf3 Constraints:
+\f0\b0  - Read-only access - No workflow execution - No data ownership transfer\
+\pard\pardeftab720\sa160\qc\partightenfactor0
+\cf4 \
+\pard\pardeftab720\sa106\partightenfactor0
+
+\fs37\fsmilli18667 \cf2 4.2 Ingestion & Observation Layer\
+\pard\pardeftab720\sa240\partightenfactor0
+
+\f1\b\fs32 \cf3 Responsibilities:
+\f0\b0  - Observe changes and activity - Normalize inputs into events - Provide reliable temporal ordering\
+
+\f1\b Outputs:
+\f0\b0  - Normalized events (create, modify, access, reference)\
+\pard\pardeftab720\sa160\qc\partightenfactor0
+\cf4 \
+\pard\pardeftab720\sa106\partightenfactor0
+
+\fs37\fsmilli18667 \cf2 4.3 Signal Extraction & Enrichment Layer\
+\pard\pardeftab720\sa240\partightenfactor0
+
+\f1\b\fs32 \cf3 Responsibilities:
+\f0\b0  - Convert events into signals - Detect references, mentions, and relationships - Enrich with semantic and temporal hints\
+
+\f1\b Signals include:
+\f0\b0  - Activity signals - Relationship signals - Lifecycle signals - Parallel-work signals\
+\pard\pardeftab720\sa160\qc\partightenfactor0
+\cf4 \
+\pard\pardeftab720\sa106\partightenfactor0
+
+\fs37\fsmilli18667 \cf2 4.4 Context Graph Layer (Core)\
+\pard\pardeftab720\sa240\partightenfactor0
+
+\fs32 \cf3 The graph is the authoritative representation of organizational context.\
+
+\f1\b Design Principles:
+\f0\b0  - Append-only - Temporal - Explainable - Relationship-first\
+\pard\pardeftab720\sa160\qc\partightenfactor0
+\cf4 \
+\pard\pardeftab720\sa106\partightenfactor0
+
+\fs37\fsmilli18667 \cf2 4.5 Trust, Freshness & Confidence Layer\
+\pard\pardeftab720\sa240\partightenfactor0
+
+\f1\b\fs32 \cf3 Responsibilities:
+\f0\b0  - Compute freshness scores - Infer ownership confidence - Detect conflicts and duplicates - Produce reliability signals\
+
+\f1\b Outputs:
+\f0\b0  - Confidence metrics, never data changes\
+\pard\pardeftab720\sa160\qc\partightenfactor0
+\cf4 \
+\pard\pardeftab720\sa106\partightenfactor0
+
+\fs37\fsmilli18667 \cf2 4.6 Intelligence & Reasoning Layer\
+\pard\pardeftab720\sa240\partightenfactor0
+
+\f1\b\fs32 \cf3 Components:
+\f0\b0  - Deterministic rule engine - Graph traversal & reasoning - Lightweight LLM (optional, last-mile only)\
+
+\f1\b Responsibilities:
+\f0\b0  - Answer contextual questions - Perform impact analysis - Generate explanations\
+\pard\pardeftab720\sa160\qc\partightenfactor0
+\cf4 \
+\pard\pardeftab720\sa106\partightenfactor0
+
+\fs37\fsmilli18667 \cf2 4.7 Interaction Layer\
+\pard\pardeftab720\sa240\partightenfactor0
+
+\f1\b\fs32 \cf3 Interfaces:
+\f0\b0  - Context-aware search - Natural language Q&A - Embedded context panels - Read-only APIs\
+\pard\pardeftab720\sa160\qc\partightenfactor0
+\cf4 \
+\pard\pardeftab720\sa106\partightenfactor0
+
+\fs37\fsmilli18667 \cf2 4.8 Governance & Control Layer\
+\pard\pardeftab720\li960\fi-480\sa47\partightenfactor0
+
+\f2\fs32 \cf3 \'e1
+\f3\fs18\fsmilli9333 \'a0\'a0\'a0\'a0\'a0 
+\f0\fs32 Role-based access control\
+
+\f2 \'e1
+\f3\fs18\fsmilli9333 \'a0\'a0\'a0\'a0\'a0 
+\f0\fs32 Context-aware permissions\
+
+\f2 \'e1
+\f3\fs18\fsmilli9333 \'a0\'a0\'a0\'a0\'a0 
+\f0\fs32 Full audit trail\
+
+\f2 \'e1
+\f3\fs18\fsmilli9333 \'a0\'a0\'a0\'a0\'a0 
+\f0\fs32 Explainability support\
+
+\f2 \'e1
+\f3\fs18\fsmilli9333 \'a0\'a0\'a0\'a0\'a0 
+\f0\fs32 Local-first deployment constraints\
+\pard\pardeftab720\sa160\qc\partightenfactor0
+\cf4 \
+\pard\pardeftab720\sa106\partightenfactor0
+
+\fs42\fsmilli21333 \cf2 5. Explicit Non-Goals (Locked)\
+\pard\pardeftab720\li960\fi-480\sa47\partightenfactor0
+
+\f2\fs32 \cf3 \'e1
+\f3\fs18\fsmilli9333 \'a0\'a0\'a0\'a0\'a0 
+\f0\fs32 No workflow orchestration\
+
+\f2 \'e1
+\f3\fs18\fsmilli9333 \'a0\'a0\'a0\'a0\'a0 
+\f0\fs32 No business process automation\
+
+\f2 \'e1
+\f3\fs18\fsmilli9333 \'a0\'a0\'a0\'a0\'a0 
+\f0\fs32 No system-of-record replacement\
+
+\f2 \'e1
+\f3\fs18\fsmilli9333 \'a0\'a0\'a0\'a0\'a0 
+\f0\fs32 No core dependency on external workflow tools (e.g., n8n)\
+\pard\pardeftab720\sa160\qc\partightenfactor0
+\cf4 \
+\pard\pardeftab720\sa106\partightenfactor0
+
+\fs53\fsmilli26667 \cf2 6. Exact Context Graph Schema\
+\pard\pardeftab720\sa106\partightenfactor0
+
+\fs42\fsmilli21333 \cf2 6.1 Node Types\
+\pard\pardeftab720\sa106\partightenfactor0
+
+\fs37\fsmilli18667 \cf2 Artifact\
+\pard\pardeftab720\sa240\partightenfactor0
+
+\fs32 \cf3 Represents any informational object.\
+Properties: - artifact_id (stable) - artifact_type (doc, record, ticket, email, file) - source_system - title / name - created_at - last_modified_at - lifecycle_state (active, dormant, obsolete, superseded)\
+\pard\pardeftab720\sa160\qc\partightenfactor0
+\cf4 \
+\pard\pardeftab720\sa106\partightenfactor0
+
+\fs37\fsmilli18667 \cf2 Person\
+\pard\pardeftab720\sa240\partightenfactor0
+
+\fs32 \cf3 Properties: - person_id - name - role - team - org_unit\
+\pard\pardeftab720\sa160\qc\partightenfactor0
+\cf4 \
+\pard\pardeftab720\sa106\partightenfactor0
+
+\fs37\fsmilli18667 \cf2 System\
+\pard\pardeftab720\sa240\partightenfactor0
+
+\fs32 \cf3 Properties: - system_id - system_type - system_name\
+\pard\pardeftab720\sa160\qc\partightenfactor0
+\cf4 \
+\pard\pardeftab720\sa106\partightenfactor0
+
+\fs37\fsmilli18667 \cf2 Concept\
+\pard\pardeftab720\sa240\partightenfactor0
+
+\fs32 \cf3 Represents abstract organizational concepts.\
+Properties: - concept_id - concept_type (project, customer, product, policy) - name\
+\pard\pardeftab720\sa160\qc\partightenfactor0
+\cf4 \
+\pard\pardeftab720\sa106\partightenfactor0
+
+\fs37\fsmilli18667 \cf2 Activity\
+\pard\pardeftab720\sa240\partightenfactor0
+
+\fs32 \cf3 Properties: - activity_id - activity_type (create, edit, review, discuss, approve) - timestamp\
+\pard\pardeftab720\sa160\qc\partightenfactor0
+\cf4 \
+\pard\pardeftab720\sa106\partightenfactor0
+
+\fs37\fsmilli18667 \cf2 Decision\
+\pard\pardeftab720\sa240\partightenfactor0
+
+\fs32 \cf3 Properties: - decision_id - decision_type (explicit, inferred) - timestamp - rationale (optional)\
+\pard\pardeftab720\sa160\qc\partightenfactor0
+\cf4 \
+\pard\pardeftab720\sa106\partightenfactor0
+
+\fs42\fsmilli21333 \cf2 6.2 Relationship Types\
+\pard\pardeftab720\li960\fi-480\sa47\partightenfactor0
+
+\f2\fs32 \cf3 \'e1
+\f3\fs18\fsmilli9333 \'a0\'a0\'a0\'a0\'a0 
+\f0\fs32 CREATED_BY (Artifact \uc0\u8594  Person)\
+
+\f2 \'e1
+\f3\fs18\fsmilli9333 \'a0\'a0\'a0\'a0\'a0 
+\f0\fs32 OWNED_BY (Artifact \uc0\u8594  Person)\
+
+\f2 \'e1
+\f3\fs18\fsmilli9333 \'a0\'a0\'a0\'a0\'a0 
+\f0\fs32 MODIFIED_BY (Artifact \uc0\u8594  Person)\
+
+\f2 \'e1
+\f3\fs18\fsmilli9333 \'a0\'a0\'a0\'a0\'a0 
+\f0\fs32 REFERENCES (Artifact \uc0\u8594  Artifact | Concept)\
+
+\f2 \'e1
+\f3\fs18\fsmilli9333 \'a0\'a0\'a0\'a0\'a0 
+\f0\fs32 DEPENDS_ON (Artifact \uc0\u8594  Artifact)\
+
+\f2 \'e1
+\f3\fs18\fsmilli9333 \'a0\'a0\'a0\'a0\'a0 
+\f0\fs32 WORKING_ON (Person \uc0\u8594  Artifact | Concept)\
+
+\f2 \'e1
+\f3\fs18\fsmilli9333 \'a0\'a0\'a0\'a0\'a0 
+\f0\fs32 DUPLICATES (Artifact \uc0\u8596  Artifact)\
+
+\f2 \'e1
+\f3\fs18\fsmilli9333 \'a0\'a0\'a0\'a0\'a0 
+\f0\fs32 CONFLICTS_WITH (Artifact \uc0\u8596  Artifact)\
+
+\f2 \'e1
+\f3\fs18\fsmilli9333 \'a0\'a0\'a0\'a0\'a0 
+\f0\fs32 SUPERSEDES (Artifact \uc0\u8594  Artifact)\
+
+\f2 \'e1
+\f3\fs18\fsmilli9333 \'a0\'a0\'a0\'a0\'a0 
+\f0\fs32 RECORDED_IN (Activity \uc0\u8594  System)\
+
+\f2 \'e1
+\f3\fs18\fsmilli9333 \'a0\'a0\'a0\'a0\'a0 
+\f0\fs32 RESULTED_IN (Decision \uc0\u8594  Artifact)\
+\pard\pardeftab720\sa240\partightenfactor0
+\cf3 All relationships are timestamped and non-destructive.\
+\pard\pardeftab720\sa160\qc\partightenfactor0
+\cf4 \
+\pard\pardeftab720\sa106\partightenfactor0
+
+\fs53\fsmilli26667 \cf2 7. Local-First Technology Stack Proposal\
+\pard\pardeftab720\sa106\partightenfactor0
+
+\fs42\fsmilli21333 \cf2 7.1 Core Principles\
+\pard\pardeftab720\li960\fi-480\sa47\partightenfactor0
+
+\f2\fs32 \cf3 \'e1
+\f3\fs18\fsmilli9333 \'a0\'a0\'a0\'a0\'a0 
+\f0\fs32 Runs on a single machine or on\uc0\u8209 prem cluster\
+
+\f2 \'e1
+\f3\fs18\fsmilli9333 \'a0\'a0\'a0\'a0\'a0 
+\f0\fs32 No mandatory cloud services\
+
+\f2 \'e1
+\f3\fs18\fsmilli9333 \'a0\'a0\'a0\'a0\'a0 
+\f0\fs32 Replaceable components\
+
+\f2 \'e1
+\f3\fs18\fsmilli9333 \'a0\'a0\'a0\'a0\'a0 
+\f0\fs32 Open standards\
+\pard\pardeftab720\sa160\qc\partightenfactor0
+\cf4 \
+\pard\pardeftab720\sa106\partightenfactor0
+
+\fs42\fsmilli21333 \cf2 7.2 Proposed Stack\
+\pard\pardeftab720\sa106\partightenfactor0
+
+\fs37\fsmilli18667 \cf2 Ingestion & Events\
+\pard\pardeftab720\li960\fi-480\sa47\partightenfactor0
+
+\f2\fs32 \cf3 \'e1
+\f3\fs18\fsmilli9333 \'a0\'a0\'a0\'a0\'a0 
+\f0\fs32 File watchers: OS-level or Python watchdog\
+
+\f2 \'e1
+\f3\fs18\fsmilli9333 \'a0\'a0\'a0\'a0\'a0 
+\f0\fs32 Event bus: Redpanda or NATS (local-friendly)\
+\pard\pardeftab720\sa160\qc\partightenfactor0
+\cf4 \
+\pard\pardeftab720\sa106\partightenfactor0
+
+\fs37\fsmilli18667 \cf2 Context Graph\
+\pard\pardeftab720\li960\fi-480\sa47\partightenfactor0
+
+\f2\fs32 \cf3 \'e1
+\f3\fs18\fsmilli9333 \'a0\'a0\'a0\'a0\'a0 
+\f0\fs32 Database: Neo4j (Community) or ArangoDB\
+
+\f2 \'e1
+\f3\fs18\fsmilli9333 \'a0\'a0\'a0\'a0\'a0 
+\f0\fs32 Justification: native graph traversal, explainability\
+\pard\pardeftab720\sa160\qc\partightenfactor0
+\cf4 \
+\pard\pardeftab720\sa106\partightenfactor0
+
+\fs37\fsmilli18667 \cf2 Signal Processing & Inference\
+\pard\pardeftab720\li960\fi-480\sa47\partightenfactor0
+
+\f2\fs32 \cf3 \'e1
+\f3\fs18\fsmilli9333 \'a0\'a0\'a0\'a0\'a0 
+\f0\fs32 Language: Python\
+
+\f2 \'e1
+\f3\fs18\fsmilli9333 \'a0\'a0\'a0\'a0\'a0 
+\f0\fs32 Rule engine: Custom deterministic rules or Drools-lite\
+\pard\pardeftab720\sa160\qc\partightenfactor0
+\cf4 \
+\pard\pardeftab720\sa106\partightenfactor0
+
+\fs37\fsmilli18667 \cf2 Semantic Processing (Optional)\
+\pard\pardeftab720\li960\fi-480\sa47\partightenfactor0
+
+\f2\fs32 \cf3 \'e1
+\f3\fs18\fsmilli9333 \'a0\'a0\'a0\'a0\'a0 
+\f0\fs32 Embeddings: SentenceTransformers\
+
+\f2 \'e1
+\f3\fs18\fsmilli9333 \'a0\'a0\'a0\'a0\'a0 
+\f0\fs32 Vector store: FAISS (local)\
+
+\f2 \'e1
+\f3\fs18\fsmilli9333 \'a0\'a0\'a0\'a0\'a0 
+\f0\fs32 LLM: Local model via Ollama / llama.cpp\
+\pard\pardeftab720\sa160\qc\partightenfactor0
+\cf4 \
+\pard\pardeftab720\sa106\partightenfactor0
+
+\fs37\fsmilli18667 \cf2 APIs & Services\
+\pard\pardeftab720\li960\fi-480\sa47\partightenfactor0
+
+\f2\fs32 \cf3 \'e1
+\f3\fs18\fsmilli9333 \'a0\'a0\'a0\'a0\'a0 
+\f0\fs32 Framework: FastAPI\
+
+\f2 \'e1
+\f3\fs18\fsmilli9333 \'a0\'a0\'a0\'a0\'a0 
+\f0\fs32 Protocols: REST + event subscriptions\
+\pard\pardeftab720\sa160\qc\partightenfactor0
+\cf4 \
+\pard\pardeftab720\sa106\partightenfactor0
+
+\fs37\fsmilli18667 \cf2 UI / Interaction\
+\pard\pardeftab720\li960\fi-480\sa47\partightenfactor0
+
+\f2\fs32 \cf3 \'e1
+\f3\fs18\fsmilli9333 \'a0\'a0\'a0\'a0\'a0 
+\f0\fs32 Web UI: React or lightweight frontend\
+
+\f2 \'e1
+\f3\fs18\fsmilli9333 \'a0\'a0\'a0\'a0\'a0 
+\f0\fs32 Extensions: Browser / IDE context panels\
+\pard\pardeftab720\sa160\qc\partightenfactor0
+\cf4 \
+\pard\pardeftab720\sa106\partightenfactor0
+
+\fs37\fsmilli18667 \cf2 Governance & Security\
+\pard\pardeftab720\li960\fi-480\sa47\partightenfactor0
+
+\f2\fs32 \cf3 \'e1
+\f3\fs18\fsmilli9333 \'a0\'a0\'a0\'a0\'a0 
+\f0\fs32 Auth: Local IAM / LDAP integration\
+
+\f2 \'e1
+\f3\fs18\fsmilli9333 \'a0\'a0\'a0\'a0\'a0 
+\f0\fs32 Audit: Append-only event logs\
+\pard\pardeftab720\sa160\qc\partightenfactor0
+\cf4 \
+\pard\pardeftab720\sa106\partightenfactor0
+
+\fs42\fsmilli21333 \cf2 7.3 What Is Explicitly Avoided\
+\pard\pardeftab720\li960\fi-480\sa47\partightenfactor0
+
+\f2\fs32 \cf3 \'e1
+\f3\fs18\fsmilli9333 \'a0\'a0\'a0\'a0\'a0 
+\f0\fs32 Heavy workflow engines\
+
+\f2 \'e1
+\f3\fs18\fsmilli9333 \'a0\'a0\'a0\'a0\'a0 
+\f0\fs32 Cloud-only AI APIs\
+
+\f2 \'e1
+\f3\fs18\fsmilli9333 \'a0\'a0\'a0\'a0\'a0 
+\f0\fs32 Large distributed data lakes\
+
+\f2 \'e1
+\f3\fs18\fsmilli9333 \'a0\'a0\'a0\'a0\'a0 
+\f0\fs32 Black-box automation\
+\pard\pardeftab720\sa160\qc\partightenfactor0
+\cf4 \
+\pard\pardeftab720\sa106\partightenfactor0
+
+\fs42\fsmilli21333 \cf2 8. Final Architecture Statement\
+\pard\pardeftab720\sa240\partightenfactor0
+
+\fs32 \cf3 This reference architecture defines a 
+\f1\b Context Intelligence Platform
+\f0\b0  that delivers shared organizational understanding through observation, inference, and explainable reasoning \'97 while remaining non-intrusive, local-first, and human-authoritative.\
+\pard\pardeftab720\sa160\qc\partightenfactor0
+\cf4 \
+\pard\pardeftab720\sa240\partightenfactor0
+
+\f1\b \cf3 Status:
+\f0\b0  Architecture Frozen\
+}

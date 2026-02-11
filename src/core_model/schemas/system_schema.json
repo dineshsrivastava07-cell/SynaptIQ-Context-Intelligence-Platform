@@ -1,0 +1,12 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Context Intelligence Platform - System",
+  "type": "object",
+  "properties": {
+    "system_id": { "type": "string", "format": "uuid" },
+    "system_type": { "type": "string" },
+    "system_name": { "type": "string" }
+  },
+  "required": ["system_id", "system_type", "system_name"],
+  "additionalProperties": false
+}

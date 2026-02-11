@@ -1,0 +1,16 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Context Intelligence Platform - Artifact",
+  "type": "object",
+  "properties": {
+    "artifact_id": { "type": "string", "format": "uuid" },
+    "artifact_type": { "type": "string", "enum": ["doc", "record", "ticket", "email", "file"] },
+    "source_system": { "type": "string" },
+    "title": { "type": "string" },
+    "created_at": { "type": "string", "format": "date-time" },
+    "last_modified_at": { "type": "string", "format": "date-time" },
+    "lifecycle_state": { "type": "string", "enum": ["active", "dormant", "obsolete", "superseded"] }
+  },
+  "required": ["artifact_id", "artifact_type", "source_system", "title", "created_at", "last_modified_at", "lifecycle_state"],
+  "additionalProperties": false
+}
